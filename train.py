@@ -4,10 +4,9 @@ from nes_py.wrappers import JoypadSpace
 import cv2
 import numpy as np
 import os
+from nes_py.wrappers import JoypadSpace as JoypadSpace_
 
-# Create Super Mario Bros environment
-env = gym_super_mario_bros.make('SuperMarioBros-v0')
-env = JoypadSpace(env, RIGHT_ONLY)
+
 
 from model import DQNAgent, create_dqn_model
 # Set up DQN agent
