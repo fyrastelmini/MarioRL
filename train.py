@@ -1,5 +1,5 @@
 import gym_super_mario_bros
-from gym_super_mario_bros.actions import RIGHT_ONLY
+from gym_super_mario_bros.actions import SIMPLE_MOVEMENT
 from nes_py.wrappers import JoypadSpace
 import cv2
 import numpy as np
@@ -7,7 +7,7 @@ import os
 
 from model import DQNAgent, create_dqn_model
 env = gym_super_mario_bros.make('SuperMarioBros-v3')
-env = JoypadSpace(env, RIGHT_ONLY)
+env = JoypadSpace(env, SIMPLE_MOVEMENT)
 # Set up DQN agent
 state_shape = (84, 84, 4)
 action_shape = env.action_space.n
@@ -41,7 +41,7 @@ for episode in range(1000):
     total_reward = 0
     while not done:
         action = agent.choose_action(state)
-        next_state, reward, done, info, prob = env.step(action)
+        next_state, reward, done, info= env.step(action)
         next_state = cv2.cvtColor(next_state, cv2.COLOR_RGB2GRAY)
         next_state = cv2.resize(next_state, preprocess_shape)
         next_state = np.append(state[:,:,1:], np.expand_dims(next_state, axis=2), axis=2)
