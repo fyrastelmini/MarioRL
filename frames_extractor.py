@@ -39,7 +39,7 @@ with tqdm(total=total_frames, desc="Processing Frames") as pbar:
     cropped_frames = [crop_frame(frame) for frame in clip.iter_frames()]
 
     # create new video clip object with cropped frames
-    cropped_clip = VideoFileClip(None, fps=30)
+    cropped_clip = VideoFileClip(None)
 
     # set size of the cropped clip to match the dimensions of the cropped frames
     cropped_clip.size = (w, h)
