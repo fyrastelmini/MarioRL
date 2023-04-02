@@ -8,7 +8,7 @@ import os
 from tqdm import tqdm
 
 filename = 'data.mp4'  # replace with the actual file path and name
-output_dir= "dataset/"
+output_dir= "frames/"
 if not(os.path.exists(filename)):
     # specify the URL of the YouTube video to download
     url = 'https://www.youtube.com/watch?v=wx_mJUWqHvs'
