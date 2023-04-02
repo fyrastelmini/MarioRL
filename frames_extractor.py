@@ -40,7 +40,7 @@ with tqdm(total=total_frames, desc="Processing Frames") as pbar:
 
     
     # create new video clip object with cropped frames
-    cropped_clip = VideoFileClip(None, fps_source=30)
+    cropped_clip = VideoFileClip(output_file)
 
     cropped_clip.duration = clip.duration
 
