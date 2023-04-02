@@ -23,10 +23,10 @@ if not(os.path.exists(filename)):
 input_file = "data.mp4"
 output_file = "data_cropped.mp4"
 # Define the coordinates of the region to crop
-x, y, w, h = 455, 0, 825, 720
+x, y, w, h = 456, 0, 825, 720
 
 clip = VideoFileClip(input_file, audio=False)
 cropped_clip = fx.crop(clip.subclip(0, clip.duration), x1=x, y1=y, x2=x+w, y2=y+h)
-cropped_clip.write_videofile(output_file)
+cropped_clip.write_images_sequence("dataset/data_frame%04d.png")
     
 print('Cropped video saved successfully.')
