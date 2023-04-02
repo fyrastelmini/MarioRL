@@ -12,7 +12,7 @@ from tensorflow.keras.optimizers import Adam
 
 # Create Super Mario Bros environment
 env = gym_super_mario_bros.make('SuperMarioBros-v0')
-env = JoypadSpace(env, RIGHT_ONLY, num_frames=4)
+env = JoypadSpace(env, RIGHT_ONLY)
 state_shape = (84, 84, 4)
 action_shape = env.action_space.n
 
