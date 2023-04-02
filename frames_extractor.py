@@ -7,6 +7,9 @@ import pytube
 import os
 from tqdm import tqdm
 
+start=17
+end=60
+
 filename = 'data.mp4'  # replace with the actual file path and name
 output_dir= "frames/"
 if not(os.path.exists(filename)):
@@ -29,8 +32,8 @@ output_file = "data_cropped.mp4"
 x, y, w, h = 458, 0, 825, 720
 
 clip = VideoFileClip(input_file, audio=False)
-cropped_clip = fx.crop(clip.subclip(17, clip.duration), x1=x, y1=y, x2=x+w, y2=y+h)
-pbar=tqdm(total=clip.fps*clip.duration)
+cropped_clip = fx.crop(clip.subclip(start, end), x1=x, y1=y, x2=x+w, y2=y+h)
+pbar=tqdm(total=cropped_clip.fps*cropped_clip.duration)
 for i, frame in enumerate(cropped_clip.iter_frames()):
     image = Image.fromarray(frame)
     image = image.resize((256, 240), resample=Image.BOX)
