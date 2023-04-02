@@ -32,7 +32,7 @@ def crop_frame(frame):
 cropped_frames = [crop_frame(frame) for frame in clip.iter_frames()]
 pbar.update(1)
 # create new video clip object with cropped frames
-cropped_clip = VideoFileClip(None, fps=30)
+cropped_clip = VideoFileClip(None, fps_source=30)
 pbar.update(1)
 cropped_clip.duration = clip.duration
 pbar.update(1)
