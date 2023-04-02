@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 from model import DQNAgent, create_dqn_model
-env = gym_super_mario_bros.make('SuperMarioBros-v0')
+env = gym_super_mario_bros.make('SuperMarioBros-v3')
 env = JoypadSpace(env, RIGHT_ONLY)
 # Set up DQN agent
 state_shape = (84, 84, 4)
