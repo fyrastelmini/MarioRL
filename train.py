@@ -1,4 +1,5 @@
 from model import DQNAgent
+from gym.wrappers.monitor import Monitor
 import gym_super_mario_bros
 from gym_super_mario_bros.actions import RIGHT_ONLY
 from nes_py.wrappers import JoypadSpace
@@ -13,7 +14,7 @@ env = JoypadSpace(env, RIGHT_ONLY)
 # Set up DQN agent
 state_shape = (84, 84, 4)
 action_shape = env.action_space.n
-agent = DQNAgent(state_shape, action_shape)
+agent = DQNAgent()
 
 # Prepopulate replay memory with saved frames
 frames_dir = 'frames'
