@@ -25,7 +25,7 @@ output_file = "data_cropped.mp4"
 # Define the coordinates of the region to crop
 x, y, w, h = 455, 0, 825, 720
 
-clip = VideoFileClip(input_file)
+clip = VideoFileClip(input_file, audio=False)
 cropped_clip = fx.crop(clip.subclip(0, clip.duration), x1=x, y1=y, x2=x+w, y2=y+h)
 cropped_clip.write_videofile(output_file)
     
