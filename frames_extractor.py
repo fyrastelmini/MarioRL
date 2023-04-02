@@ -1,5 +1,6 @@
 import cv2
 from moviepy.video.io.VideoFileClip import VideoFileClip
+from moviepy.video.fx import all as fx
 import pytube
 import os
 
@@ -25,10 +26,7 @@ output_file = "data_cropped.mp4"
 x, y, w, h = 455, 0, 825, 720
 
 clip = VideoFileClip(input_file)
-cropped_clip = clip.subclip(0, clip.duration).crop(x1=x, y1=y, x2=x+w, y2=y+h)
-cropped_clip.write_videofile(output_file, fps=30)
-
-cropped_clip.close()
-clip.close()
+cropped_clip = fx.crop(clip.subclip(0, clip.duration), x1=x, y1=y, x2=x+w, y2=y+h)
+cropped_clip.write_videofile(output_file)
     
 print('Cropped video saved successfully.')
