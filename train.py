@@ -14,7 +14,7 @@ env = JoypadSpace(env, RIGHT_ONLY)
 from model import DQNAgent, create_dqn_model
 # Set up DQN agent
 state_shape = (84, 84, 4)
-
+action_shape = env.action_space.n
 agent = DQNAgent()
 
 # Prepopulate replay memory with saved frames
