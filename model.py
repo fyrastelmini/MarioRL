@@ -2,6 +2,9 @@ import gym
 import random
 import numpy as np
 import tensorflow as tf
+import gym_super_mario_bros
+from gym_super_mario_bros.actions import RIGHT_ONLY
+from nes_py.wrappers import JoypadSpace
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
 from tensorflow.keras.optimizers import Adam
