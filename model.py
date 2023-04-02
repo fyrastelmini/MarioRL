@@ -9,6 +9,7 @@ from tensorflow.keras.optimizers import Adam
 
 
 def create_dqn_model():
+    state_shape = (84, 84, 4)
     model = Sequential()
     model.add(Conv2D(32, (8, 8), strides=(4, 4), activation='relu', input_shape=state_shape))
     model.add(Conv2D(64, (4, 4), strides=(2, 2), activation='relu'))
