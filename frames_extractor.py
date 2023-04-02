@@ -2,18 +2,22 @@ import cv2
 from moviepy.video.io.VideoFileClip import VideoFileClip
 from tqdm import tqdm
 import pytube
+import os
 
+filename = 'data.mp4'  # replace with the actual file path and name
+
+if not(os.path.exists(filename)):
 # specify the URL of the YouTube video to download
-url = 'https://www.youtube.com/watch?v=wx_mJUWqHvs'
+    url = 'https://www.youtube.com/watch?v=wx_mJUWqHvs'
 
 # create a YouTube object from the URL
-yt = pytube.YouTube(url)
+    yt = pytube.YouTube(url)
 
 # get the highest resolution stream and download the video
-stream = yt.streams.get_highest_resolution()
-stream.download(filename='data.mp4')
+    stream = yt.streams.get_highest_resolution()
+    stream.download(filename=filename)
 
-print('Video downloaded successfully.')
+    print('Video downloaded successfully.')
 
 pbar=tqdm(total=8)
 # set input and output file paths
