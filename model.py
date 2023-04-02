@@ -8,14 +8,14 @@ from nes_py.wrappers import JoypadSpace
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
 from tensorflow.keras.optimizers import Adam
-
+env = gym_super_mario_bros.make('SuperMarioBros-v0')
+env = JoypadSpace(env, RIGHT_ONLY)
+state_shape = (84, 84, 4)
+action_shape = env.action_space.n
 
 
 def create_dqn_model():
-    env = gym_super_mario_bros.make('SuperMarioBros-v0')
-    env = JoypadSpace(env, RIGHT_ONLY)
-    state_shape = (84, 84, 4)
-    action_shape = env.action_space.n
+
     model = Sequential()
     model.add(Conv2D(32, (8, 8), strides=(4, 4), activation='relu', input_shape=state_shape))
     model.add(Conv2D(64, (4, 4), strides=(2, 2), activation='relu'))
