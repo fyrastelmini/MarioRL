@@ -18,8 +18,6 @@ if not(os.path.exists(filename)):
     stream.download(filename=filename)
 
     print('Video downloaded successfully.')
-
-pbar=tqdm(total=8)
 # set input and output file paths
 input_file = "data.mp4"
 output_file = "data_cropped.mp4"
