@@ -8,6 +8,8 @@ from nes_py.wrappers import JoypadSpace
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D, Flatten
 from tensorflow.keras.optimizers import Adam
+from nes_py.wrappers import JoypadSpace as JoypadSpace_
+
 class JoypadSpace(JoypadSpace_):
     def step(self, action):
         obs, reward, done, info = self.env.step(self._action_map[action])
