@@ -11,7 +11,7 @@ def make_dataset(df):
         if verbose==True: pbar.update(1)
         return(cv2.resize(cv2.imread(item), (256, 240)))
 
-    paths = df["paths"][0:5000]
+    paths = df["paths"][0:2000]
     pbar=tqdm(total=len(paths))
     frames = [make_element(i) for i in paths]
 
