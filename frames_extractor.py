@@ -10,6 +10,10 @@ import argparse
 import tkinter as tk
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--youtube_link', type=str, required=True, help='Link of the youtube demo video')
 parser.add_argument('--start', type=int, default=0, required=False, help='Start of the video')
@@ -114,19 +118,52 @@ pbar.close()
 print('Cropped video saved successfully.')
 
 def detect_button(img):
-    #received a cropped image containing a NES controller button and detects if the button is colord blue
-    #returns 1 if there's blue, 0 otherwise
-    img=img.convert('RGB')
-    r,g,b=img.split()
-    r=np.array(r)
-    g=np.array(g)
-    b=np.array(b)
-    if np.sum(b)>np.sum(r) and np.sum(b)>np.sum(g):
+    img=np.array(img)
+    # convert image to HSV color space
+    hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+
+    # define lower and upper bounds of blue color with some tolerance
+    lower_blue = np.array([90, 150, 150])
+    upper_blue = np.array([110, 255, 255])
+
+    # create a mask that identifies blue pixels in the image
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+    # count the number of blue pixels in the mask
+    num_blue_pixels = np.count_nonzero(mask)
+    # count the number of pixels in the image
+    num_pixels = mask.shape[0] * mask.shape[1]
+    """
+    # plot the image, mask, and masked image
+    fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(12, 4))
+
+    # plot the original image
+    ax[0].imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    ax[0].set_title('Original Image')
+
+    # plot the mask
+    ax[1].imshow(mask, cmap='gray')
+    ax[1].set_title('Mask')
+
+    # plot the masked image
+    ax[2].imshow(cv2.cvtColor(masked_image, cv2.COLOR_BGR2RGB))
+    ax[2].set_title('Masked Image')
+
+    # set common title for the subplots
+    fig.suptitle('Blue Object Detection', fontsize=16)
+
+    plt.show()
+"""
+    # if there are enough blue pixels, the button is considered pressed
+    if num_blue_pixels >= int(0.2 * num_pixels):
+        #print("button pressed")
         return 1
     else:
         return 0
+
 buttons=[]
 for i in range(1,len(global_coords)):
+    x, y, w, h = global_coords[i]
     print("extracting the "+things_to_do[i]+"\n")
     cropped_clip = fx.crop(clip.subclip(start, end), x1=x, y1=y, x2=x+w, y2=y+h)
     pbar=tqdm(total=int(cropped_clip.fps*cropped_clip.duration))
