@@ -72,7 +72,10 @@ for i,thing in zip(global_coords,things_to_do):
 
 
 
-
+#check if a directory named "frames" exists, if not create it
+if not(os.path.exists(output_dir)):
+    os.mkdir(output_dir)
+    print("Directory " , output_dir ,  " Created ")
 
 """
 
