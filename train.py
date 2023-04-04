@@ -20,7 +20,7 @@ print("Converting inputs to binary...")
 
 #train the model
 input_shape=frames[0].shape
-#print(inputs_binary[0].shape)
+print(inputs[0].shape)
 model=create_cnn_agent(input_shape, 7)
 model.summary()
 print("Training model...")
