@@ -28,7 +28,7 @@ print("Training model...")
 if tf.test.is_gpu_available():
     print("Using GPU")
     with tf.device('/device:GPU:0'):
-        model.fit(frames_normalized, inputs, batch_size=32, epochs=10, validation_split=0.2)
+        model.fit(frames_normalized, inputs, batch_size=32, epochs=1000, validation_split=0.2)
 else:
     print("Using CPU")
-    model.fit(frames_normalized, inputs, batch_size=32, epochs=10, validation_split=0.2)
+    model.fit(frames_normalized, inputs, batch_size=32, epochs=1000, validation_split=0.2)
