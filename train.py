@@ -24,4 +24,11 @@ print("Converting inputs to binary...")
 model=create_cnn_agent(input_shape, 7)
 model.summary()
 print("Training model...")
-model.fit(frames_normalized, inputs, batch_size=32, epochs=10, validation_split=0.2)
+#check if there is a gpu and use it
+if tf.test.is_gpu_available():
+    print("Using GPU")
+    with tf.device('/device:GPU:0'):
+        model.fit(frames_normalized, inputs, batch_size=32, epochs=10, validation_split=0.2)
+else:
+    print("Using CPU")
+    model.fit(frames_normalized, inputs, batch_size=32, epochs=10, validation_split=0.2)
