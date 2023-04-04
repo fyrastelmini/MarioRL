@@ -46,23 +46,23 @@ input_file = "data.mp4"
 global_coords=[]
 things_to_do=["gameplay screen","A button","B button", "Start button", "Select button","UP button","DOWN button","RIGHT button","LEFT button"]
 
-x, y, w, h= 487 90 705 556
+x, y, w, h= [487,90,705,556]
 global_coords.append((x, y, w, h))
-x, y, w, h= 156 93 10 11
+x, y, w, h= [156,93,10,11]
 global_coords.append((x, y, w, h))
-x, y, w, h= 140 92 10 10
+x, y, w, h= [140,92,10,10]
 global_coords.append((x, y, w, h))
-x, y, w, h= 118 95 11 6
+x, y, w, h= [118,95,11,6]
 global_coords.append((x, y, w, h))
-x, y, w, h= 103 95 9 5
+x, y, w, h= [103,95,9,5]
 global_coords.append((x, y, w, h))
-x, y, w, h= 76 81 9 9
+x, y, w, h= [76,81,9,9]
 global_coords.append((x, y, w, h))
-x, y, w, h= 77 97 7 6
+x, y, w, h= [77,97,7,6]
 global_coords.append((x, y, w, h))
-x, y, w, h= 85 88 7 8
+x, y, w, h= [85,88,7,8]
 global_coords.append((x, y, w, h))
-x, y, w, h= 69 87 6 9
+x, y, w, h= [69,87,6,9]
 global_coords.append((x, y, w, h))
 for i,thing in zip(range(len(global_coords),things_to_do):
     x, y, w, h = global_coords[i]
