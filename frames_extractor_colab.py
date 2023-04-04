@@ -64,7 +64,7 @@ x, y, w, h= [85,88,7,8]
 global_coords.append((x, y, w, h))
 x, y, w, h= [69,87,6,9]
 global_coords.append((x, y, w, h))
-for i,thing in zip(global_coords,things_to_do)):
+for i,thing in zip(global_coords,things_to_do):
     x, y, w, h = i
     print(thing," coordinates are ",x, y, w, h)
 
