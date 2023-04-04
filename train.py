@@ -13,7 +13,7 @@ frames,inputs=make_dataset(df)
 
 #normalize the frames
 print("Normalizing frames...")
-frames_normalized = tf.image.convert_image_dtype(frames, dtype=tf.float32)
+frames_normalized = np.array(frames) / 255.0
 #convert the inputs to binary 
 print("Converting inputs to binary...")
 #inputs_binary= tf.one_hot(inputs, depth=7)
