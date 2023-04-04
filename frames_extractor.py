@@ -178,4 +178,4 @@ for i in range(1,len(global_coords)):
 dictionary = {things_to_do[i]: buttons[i-1] for i in range(1, len(things_to_do))}
 df=pd.DataFrame(dictionary,columns=things_to_do[1:])
 df["paths"]=paths
-df.to_csv("data.csv")
+df.to_csv("data.csv",index=False)
