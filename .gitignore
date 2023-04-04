@@ -2,9 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
-#videos
+#videos/dataset
 *.mp4
 *.png
+*.csv
 # C extensions
 *.so
 
