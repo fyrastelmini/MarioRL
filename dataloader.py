@@ -17,5 +17,5 @@ def make_dataset(df):
 
 
     #get the labels
-    labels = df[df.columns[0:-2]]
+    labels = df[["A button","B button", "Start button","UP button","DOWN button","RIGHT button","LEFT button"]][0:2000]
     return frames,labels
