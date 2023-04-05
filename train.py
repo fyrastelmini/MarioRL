@@ -61,6 +61,14 @@ optimizer = torch.optim.Adam(policy_net.parameters(), lr=learning_rate)
 # Convert data to TensorDataset
 print("loading dataset")
 print(type(labels))
+
+
+#check if there's a gpu, if so train on gpu
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
+policy_net.to(device)
+value_net.to(device)
+#put data in gpu
 preprocessed_frames, preprocessed_labels = preprocess_data(frames, labels)
 
 # Convert data to TensorDataset
@@ -68,12 +76,8 @@ dataset = TensorDataset(torch.Tensor(preprocessed_frames), torch.Tensor(preproce
 
 # Create DataLoader
 dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-
-#check if there's a gpu, if so train on gpu
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(device)
-policy_net.to(device)
-value_net.to(device)
+preprocessed_frames = preprocessed_frames.to(device)
+preprocessed_labels = preprocessed_labels.to(device)
 
 
 for epoch in range(num_epochs):
