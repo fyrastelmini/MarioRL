@@ -76,12 +76,13 @@ dataset = TensorDataset(torch.Tensor(preprocessed_frames), torch.Tensor(preproce
 
 # Create DataLoader
 dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-preprocessed_frames = preprocessed_frames.to(device)
-preprocessed_labels = preprocessed_labels.to(device)
+
 
 
 for epoch in range(num_epochs):
     for i, (batch_frames, batch_labels) in enumerate(dataloader):
+        batch_frames = batch_frames.to(device)
+        batch_labels = batch_labels.to(device)
         loss = train_batch(batch_frames, batch_labels, policy_net=policy_net, value_net=value_net, optimizer=optimizer, gamma=gamma, epsilon_clip=epsilon_clip)
     print(f"Epoch {epoch+1}, Loss = {loss}")
 
