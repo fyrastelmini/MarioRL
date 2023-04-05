@@ -6,6 +6,13 @@ import torch.optim as optim
 import numpy as np
 import pandas as pd
 from torch.utils.data import TensorDataset, DataLoader
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--num_epochs', type=int, required=True, help='Number of training epochs')
+args = parser.parse_args()
+epochs=args.num_epochs
+
 df=pd.read_csv("data.csv")
 frames, labels = make_dataset(df[0:10000])
 # Load data and labels
@@ -46,7 +53,7 @@ value_net = ValueNetwork(num_actions=7)
 gamma = 0.99
 epsilon_clip = 0.2
 learning_rate = 1e-5
-num_epochs = 50
+num_epochs = epochs
 batch_size = 32
 
 # Create an instance of the Adam optimizer
