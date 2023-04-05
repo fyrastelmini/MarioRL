@@ -34,5 +34,9 @@ def preprocess_data(frames, labels):
     for frame in frames:
         preprocessed_frames.append(preprocess_frame(frame))
     preprocessed_frames = torch.cat(preprocessed_frames, dim=0)
-    labels_tensor = torch.tensor(labels.values, dtype=torch.float32)
-    return preprocessed_frames, labels_tensor
+    # Convert the labels to a PyTorch tensor with one_hot encoding
+    labels_one_hot = torch.tensor(labels.values, dtype=torch.float32)
+    print(labels_one_hot)
+    print(labels_one_hot.shape)
+    print(preprocessed_frames.shape)
+    return preprocessed_frames, labels_one_hot

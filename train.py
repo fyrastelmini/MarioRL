@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from torch.utils.data import TensorDataset, DataLoader
 df=pd.read_csv("data.csv")
-frames, labels = make_dataset(df)
+frames, labels = make_dataset(df[0:10000])
 # Load data and labels
 #data, labels = preprocess_data(frames, labels)
 
@@ -15,23 +15,25 @@ frames, labels = make_dataset(df)
 #print(f"Data shape: {data.shape}")  # should be (3, 1, 84, 84)
 #print(f"Labels shape: {labels.shape}")  # should be (1, 7)
 
-def train_batch(frames, labels, policy_net, value_net, optimizer, gamma, epsilon_clip):
-    frames_tensor = torch.tensor(frames, dtype=torch.float32).unsqueeze(1)
-
-    labels_tensor = torch.tensor(labels, dtype=torch.long)
-
-    # Calculate action probabilities and values
-    action_probs = policy_net(frames_tensor)
-    state_values = value_net(frames_tensor)
-    # Calculate log probabilities of chosen actions
-    chosen_action_probs = action_probs.gather(1, labels_tensor)
-    log_probs = torch.log(chosen_action_probs)
-
-    # Calculate total loss
-    loss = -torch.mean(log_probs * state_values)
-    print(loss)
-    # Backpropagate and update weights
+def train_batch(data, target, policy_net, value_net, optimizer, gamma, epsilon_clip):
     optimizer.zero_grad()
+    data = torch.tensor(data, dtype=torch.float32).unsqueeze(1)
+        # Feed forward the data into the policy and value networks
+    policy_output = policy_net(data)
+    value_output = value_net(data)
+
+    # Compute the loss
+    criterion = nn.BCEWithLogitsLoss()
+    #print(policy_output.shape)
+    #print(target.shape)
+    #print(value_output.shape)
+    policy_loss = criterion(policy_output, target)
+    value_loss = criterion(value_output, target)
+
+            # Compute the total loss
+    loss = policy_loss + value_loss
+
+            # Backpropagate the loss and update the weights
     loss.backward()
     optimizer.step()
 
@@ -39,12 +41,12 @@ def train_batch(frames, labels, policy_net, value_net, optimizer, gamma, epsilon
 
 # Create an instance of the PolicyNetwork model
 policy_net = PolicyNetwork(num_actions=7)
-value_net = ValueNetwork()
+value_net = ValueNetwork(num_actions=7)
 # Define hyperparameters
 gamma = 0.99
 epsilon_clip = 0.2
 learning_rate = 1e-5
-num_epochs = 10
+num_epochs = 50
 batch_size = 32
 
 # Create an instance of the Adam optimizer
