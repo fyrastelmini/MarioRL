@@ -69,6 +69,13 @@ dataset = TensorDataset(torch.Tensor(preprocessed_frames), torch.Tensor(preproce
 # Create DataLoader
 dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
+#check if there's a gpu, if so train on gpu
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
+policy_net.to(device)
+value_net.to(device)
+
+
 for epoch in range(num_epochs):
     for i, (batch_frames, batch_labels) in enumerate(dataloader):
         loss = train_batch(batch_frames, batch_labels, policy_net=policy_net, value_net=value_net, optimizer=optimizer, gamma=gamma, epsilon_clip=epsilon_clip)
