@@ -1,6 +1,6 @@
 # MarioRL (still under construction)
 Extracts the player inputs from VOD of speedruns, requires a VOD with inputs shown like this:
-![alt text](https://github.com//fyrastelmini/MarioRL/main/controller.png?raw=true)
+![alt text](https://github.com/fyrastelmini/MarioRL/blob/main/Controller.png?raw=true) 
 
 Currently works only for NES
 
